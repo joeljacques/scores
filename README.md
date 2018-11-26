@@ -1,26 +1,25 @@
 # scores
 Mudderscup score webapp
 
-# Requirements
+# Requirements (Linux)
+python 3
+
 install Django
 `$ pip install django`
 
 install  Virtualenv
 `$ pip install virtualenv`
 
-setup virtual environment in project directory
-``` ~/scores$ touch requirements.txt ```
+setup virtual environment in project director
+`~/scores$ virtualenv venv`
 
-``` ~/scores$ virtualenv venv ```
 install install package for the command mysql_config
-´$sudo apt install libmariadbclient-dev`
+`$sudo apt install libmariadbclient-dev`
 
 install package for the command mysql_config
-´$sudo apt install libmariadbclient-dev`
+`$sudo apt install libmariadbclient-dev`
 
-
-install package for the command mysql_config
-´$sudo apt install libmariadbclient-dev`
+install mysql driver `$ pip install mysqlclient`
 
 Set database user and password in settings.py
 
