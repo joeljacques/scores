@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 align="center">{{ matchup.matchup_team1.team_name }} vs {{ matchup.matchup_team2.team_name }}</h2>
+<h4 align="center">{{ game.slot.location.location_name }}</h4>
+<h4 align="center">{{ game.slot.start_time }} Uhr</h4>
+
+
+{% if error_message %} <p><strong>{{error_message}}</strong></p>{%endif %}
+
+    <form action="{% url 'game' game.game_id %}" method="post">
+    {% csrf_token %}
+    {% if game.game_completed != 0 %}
+
+        <div class="row">
+
+        <div class="col" id="yo">
+        <h5 align="center">{{ matchup.matchup_team1.team_acronym }}</h5>
+        <input class="form-control" id="team1_score" type="number" min="0" name="team1_score" value="{{ matchup.matchup_team1_score }}">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="decrement('team1_score')"> - </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="increment('team1_score')"> + </button>
+            </div>
+        </div>
+        </div>
+        <div class="col">
+        <h5 align="center">{{ matchup.matchup_team2.team_acronym }}</h5>
+        <input class="form-control" id="team2_score" type="number" min="0" name="team2_score" value="{{ matchup.matchup_team2_score }}">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="decrement('team2_score')"> - </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="increment('team2_score')"> + </button>
+            </div>
+        </div>
+        </div>
+        
+        </div>
+
+        <h5 align="center">Timeouts</h5>
+
+        <div class="row">
+        <div class="col">
+        <input class="form-control" id="team1_timeouts" type="number" min="0" name="team1_timeouts" value="{{ matchup.matchup_team1_timeouts }}">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="decrement('team1_timeouts')"> - </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="increment('team1_timeouts')"> + </button>
+            </div>
+        </div>
+        </div>
+        <div class="col">
+        <input class="form-control" id="team2_timeouts" type="number" min="0" name="team2_timeouts" value="{{ matchup.matchup_team2_timeouts }}">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="decrement('team2_timeouts')"> - </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-block" onclick="increment('team2_timeouts')"> + </button>
+            </div>
+        </div>
+        </div>
+        </div>
+        <script>
+            function increment(clicked_id){
+                var num = Number(document.getElementById(clicked_id).value);
+                document.getElementById(clicked_id).value = num + 1;
+            }
+        </script>
+        <script>
+            function decrement(clicked_id){
+                var num = Number(document.getElementById(clicked_id).value);
+                document.getElementById(clicked_id).value = num - 1;
+            }
+        </script>
+
+        {% if game.game_completed == 1 %}
+            <input type="submit" class="btn btn-warning btn-block" id="enter" name="update" value="Correct Data">
+        {% elif game.game_completed == 2 %}
+            <input type="submit" class="btn btn-success btn-block" id="enter" name="update" value="Update Score">
+            <input type="submit" class="btn btn-danger btn-block" id="enter" name="end" value="Submit Match">
+        {% endif %}
+    {% else %}
+        <form action="{% url 'game' game.game_id %}" method="post>">
+        <input type="hidden" name="start" value="lambda">
+        <input type="submit" class="btn btn-success btn-block" value="Start Game">
+    {% endif %}
+    </form>
+{% endblock %}

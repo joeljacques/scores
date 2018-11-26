@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="navbar navbar-dark bg-light" id="filter_nav">
+<form action="{% url 'overview' %}" method="GET" class="form-inline">
+    <select id="location_pick" name="location" class="form-control">
+            <option selected>All Locations</option>
+        {% for loc in location_list %}
+            <option value="{{ loc.location_name }}">{{ loc.location_name }}</option>
+        {% endfor %}
+    </select>
+    <select id="status_pick" name="status" class="form-control">
+        <option>All Games</option>
+        <option value="Uncompleted">Uncompleted</option>
+        <option value="Completed">Completed</option>
+    </select>
+    <input type="submit" id="filter_button" class="btn btn-outline-primary" value="Apply Filter"/>
+</form>
+</nav>
+{% if location_filtered %}
+    {% if status_filtered %}
+        <h4>{{ selected_location }} - {{ selected_status }} Matches</h4>
+    {% else %}
+        <h4>{{ selected_location }}</h4>
+    {% endif %}
+{% elif status_filtered %}
+    <h4>{{ selected_status }} Matches</h4>
+{% else %}
+    <h4>All Locations</h4>
+{% endif %}
+<ul class="list-inline">
+    <li class="list-inline-item" id="upcoming">upcoming</li>
+    <li class="list-inline-item" id="running">running</li>
+    <li class="list-inline-item" id="completed">completed</li>
+</ul>
+    <ul class="list-group" id="game_list">
+    {% for game in game_list %}
+        <a id="status{{ game.game_completed }}" href="{% url 'game' game.game_id %}"
+        class="list-group-item list-group-item-action"><b>{{ game.matchup.matchup_team1.team_name }} 
+        vs {{ game.matchup.matchup_team2.team_name }}: </b> - {{ game.slot.start_time }} | <b>{{ game.matchup.matchup_team1_score }}:{{ game.matchup.matchup_team2_score }}</b></a>
+    {% endfor %}
+</ul>
+{% endblock %}

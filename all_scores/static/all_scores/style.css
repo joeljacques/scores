@@ -1,0 +1,54 @@
+#enter,
+button {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.list-group-item.list-group-item-action, #upcoming{
+    background-color: #f8f8f8f8;
+}
+#status1, #completed {
+    background-color: #ff8484;
+}
+
+#status2, #running {
+    background-color: #8aff84;
+}
+
+#location_pick{
+    margin-right: 10px;
+}
+
+#status_pick{
+    margin-right: 10px;
+}
+
+#game_list {
+    margin-top: 15px;
+}
+
+#filter_nav {
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+#running, #completed, #upcoming {
+    padding: 2px 4px 2px 4px;
+    border-radius: 5px;
+}
+
+#team1_score, #team2_score,
+#team1_timeouts, #team2_timeouts{
+    text-align: center;
+    font-size: 30px;
+}
+
+#login_form {
+    margin: 10px 20px 10px 20px;
+}
+
+.inline-header {
+    display: inline-block;
+    margin: 5px 0px 0px 10px;
+    padding-left: 5px;
+    padding-left: 5px;
+}
