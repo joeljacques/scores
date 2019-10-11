@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mc_scheduler_2018_11_20',
         'USER': 'root',
-        'PASSWORD': 'dmb1819',
+        'PASSWORD': 'your_password',
         'HOST': 'localhost',
         'PORT': ''
     }
